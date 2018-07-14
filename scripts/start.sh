@@ -201,7 +201,7 @@ if [[ "$RUN_SCRIPTS" == "1" ]] ; then
   fi
 fi
 
-if [ -z "$SKIP_COMPOSER" ]; then
+if [[ "$SKIP_COMPOSER" == "0" ]]; then
     # Try auto install for composer
     if [ -f "/var/www/html/composer.lock" ]; then
         if [ "$APPLICATION_ENV" == "development" ]; then
@@ -211,9 +211,16 @@ if [ -z "$SKIP_COMPOSER" ]; then
             composer global require hirak/prestissimo
             composer install --no-dev --working-dir=/var/www/html
         fi
+    else
+        composer install --working-dir=/var/www/html
     fi
+fi
+
+if [[ "$SET_STORAGE_PERMISSION" == "1" ]]; then
+    chmod 777 -R /var/www/html/storage
+		chmod 775 -R /var/www/html/public
+		chmod 777 -R /var/www/html/bootstrap/cache
 fi
 
 # Start supervisord and services
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
-
