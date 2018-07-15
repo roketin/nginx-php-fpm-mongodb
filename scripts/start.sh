@@ -216,10 +216,19 @@ if [[ "$SKIP_COMPOSER" == "0" ]]; then
     fi
 fi
 
+if [ -e "/var/www/html/.env.example" ]; then
+    cp /var/www/html/.env.example /var/www/html/.env
+fi
+
 if [[ "$SET_STORAGE_PERMISSION" == "1" ]]; then
     chmod 777 -R /var/www/html/storage
 		chmod 775 -R /var/www/html/public
 		chmod 777 -R /var/www/html/bootstrap/cache
+fi
+
+if [[ "$SET_LARAVEL_CRONJOB" == "1" ]]; then
+    crontab -l | { cat; echo "* * * * * php /var/www/html/artisan schedule:run >> /dev/null 2>&1"; } | crontab -
+    crond
 fi
 
 # Start supervisord and services
