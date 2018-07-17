@@ -38,4 +38,6 @@ The following flags are a list of all the currently supported options that can b
 | SKIP_CHOWN              | Set to 1 to avoid running chown -Rf on /var/www/html                                                           |
 | SKIP_COMPOSER           | Set to 1 to avoid installing composer                                                                          |
 | SET_STORAGE_PERMISSION  | Set to 1 to set storage permission for laravel framework                                                       |
-| SET_LARAVEL_CRONJOB     | Set to 1 to enabled laravel cron job (Task Scheduling)
+| SET_LARAVEL_CRONJOB     | Set to 1 to enabled laravel cron job (Task Scheduling)                                                         |
+| LARAVEL_DB_MIGRATION    | Laravel Database Migration                                                                                     |
+| LARAVEL_DB_SEED         | Laravel Database Seed                                                                                          |

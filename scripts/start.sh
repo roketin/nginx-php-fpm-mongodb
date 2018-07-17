@@ -231,5 +231,13 @@ if [[ "$SET_LARAVEL_CRONJOB" == "1" ]]; then
     crond
 fi
 
+if [[ "$LARAVEL_DB_MIGRATION" == "1" ]]; then
+    php /var/www/html/artisan migrate
+fi
+
+if [[ "$LARAVEL_DB_SEED" == "1" ]]; then
+    php /var/www/html/artisan db:seed
+fi
+
 # Start supervisord and services
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
