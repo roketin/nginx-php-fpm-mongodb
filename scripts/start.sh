@@ -216,6 +216,8 @@ if [[ "$SKIP_COMPOSER" == "0" ]]; then
     fi
 fi
 
+composer dump-autolaod
+
 if [ -e "/var/www/html/.env.example" ]; then
     cp /var/www/html/.env.example /var/www/html/.env
 fi
